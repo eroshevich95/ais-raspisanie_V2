@@ -1,0 +1,17 @@
+Options -Indexes
+AddDefaultCharset UTF-8
+
+<FilesMatch "(^\.env|\.log$|^backup_.*\.sql$|^users\.json$|^error_log$)">
+    Require all denied
+</FilesMatch>
+
+RedirectMatch 403 ^/tools/.*\.php$
+RedirectMatch 403 ^/test_helpers\.php$
+RedirectMatch 403 ^/alice_skill\.php$
+RedirectMatch 403 ^/alice_(debug|errors)\.log$
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
